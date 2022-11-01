@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dates</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" integrity="sha256-b88RdwbRJEzRx95nCuuva+hO5ExvXXnpX+78h8DjyOE=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js" integrity="sha256-/7FLTdzP6CfC1VBAj/rsp3Rinuuu9leMRGd354hvk0k=" crossorigin="anonymous"></script>
+    <script>
+        $(function () {
+          $("#id_start_date").datepicker({
+            format:'dd/mm/yyyy',
+          });
+          $("#id_end_date").datepicker({
+            format:'dd/mm/yyyy',
+          });
+          $("label").css({'color':'white','margin-bottom':'5px'});
+          $("#id_start_date").css({"margin-bottom":"20px","border-radius":"5px"});
+          $("#id_end_date").css({"margin-bottom":"30px","border-radius":"5px"})
+        });
+      </script>
+</head>
+
+<body style="background:#31078B;font-family:Century Gothic;display:flex;flex-direction:column;justify-content:center;align-items:center;height:98vh">
+    <h1 style="color:#87EBC7">Asteroïd Scanner</h1>
+    <img style="width:100px;height:auto;margin-bottom:50px" src="https://gpm.nasa.gov/sites/default/files/document_files/NASA-Logo-Large.png" alt="nasa logo"/>
+    <form method="post" style="display:flex;flex-direction:column;align-items:center">
+        {% csrf_token %}
+        {{ form }}
+        <input id="submit" type="submit" value="Go !" style="background-color:#87EBC7;border-radius:10px;font-family:Century Gothic;padding:5px;font-weight:bold;width:80px;border:none">
+    </form>
+    {% if error %}
+        <p style="color:#C828CB">{{error}}</p>
+    {% endif %}
+</body>
+</html>

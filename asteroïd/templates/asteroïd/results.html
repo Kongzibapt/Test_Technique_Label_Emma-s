@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+</head>
+<body style="background:#31078B;font-family:Century Gothic;display:flex;flex-direction:column;justify-content:center;align-items:center">
+    <h1 style="color:#87EBC7">Asteroïd Scanner</h1>
+    <p style="color:white">{% if start_date == end_date %} {{start_date}} {% else %}From {{start_date}} to {{end_date}} {% endif %}</p>
+    <a href="/asteroïd/" style="color:#C828CB;text-decoration:none;margin-bottom:30px">Return to dates</a>
+    <div style="width:80%;max-width:500px">
+    {% for info in infos %}
+        <div class="item" style="cursor:pointer;border-width:1px;border-color:black;border-radius:5px;background-color:#87EBC7;margin:10px;padding:20px">
+            <h2 style="font-weight:bold;margin:0">
+                ☄️ {{ info.name }}
+            </h2>
+            <p><strong>Estimated diameter : </strong>{{ info.estimated_diameter }} km</p>
+            <p><strong>Distance : </strong>{{ info.distance }} km</p>
+            <p style="margin-bottom:0px"><strong>Next passage : </strong>{{ info.next_passage }}</p>
+            <div class="lasts">
+                <p><strong>Lasts passages : </strong></p>
+                <ul>
+                {% for lasts in info.lasts_passages %}
+                    <li style="margin:5px">
+                        <strong>Date :</strong> {{lasts.date}} <br/>
+                        <strong>Distance :</strong> {{lasts.distance}} km
+                    </li>
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+    <script>
+        $(".lasts").hide();
+        $(".item").click(function(){
+            if($(this).is("#slided")){
+                $(this).removeAttr("id")
+                $(this).children(".lasts").slideUp();
+            } else {
+                $(this).attr("id","slided");
+                $(this).children(".lasts").slideDown();
+            }
+        });
+    </script>
+</body>
+</html>
